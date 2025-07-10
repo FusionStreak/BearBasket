@@ -1,0 +1,10 @@
+[package]
+name = "bearbasket-backend"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+axum = { version = "0.6", features = ["json"] }
+diesel = { version = "2.2.0", features = ["postgres"] }
+dotenvy = "0.15"
