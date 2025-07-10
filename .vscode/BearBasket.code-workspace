@@ -1,0 +1,72 @@
+{
+  "folders": [
+    {
+      "label": "BearBasket",
+      "path": "../"
+    },
+    {
+      "name": "development",
+      "path": "../development"
+    },
+    {
+      "name": "Android App",
+      "path": "../android-app"
+    },
+    {
+      "name": "Web App",
+      "path": "../web-app"
+    },
+    {
+      "name": "Backend",
+      "path": "../backend"
+    }
+  ],
+  "extensions": {
+    "recommendations": [
+      "rust-lang.rust-analyzer",
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "github.vscode-github-actions",
+      "ms-azuretools.vscode-containers",
+      "fill-labs.dependi",
+      "ms-vscode-remote.remote-containers",
+      "tamasfe.even-better-toml",
+      "codezombiech.gitignore",
+      "davidanson.vscode-markdownlint",
+      "ms-vscode-remote.remote-ssh",
+      "ms-vscode-remote.remote-ssh-edit",
+      "ms-vscode.remote-explorer",
+      "sethjones.kotlin-on-vscode"
+    ]
+  },
+  "settings": {
+    "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true,
+      "**/node_modules": true,
+      "**/target": true,
+      "**/dist": true,
+      "android-app": true,
+      "development": true,
+      "web-app": true,
+      "backend": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/target": true,
+      "**/dist": true
+    },
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "sqltools.connections": [
+      {
+        "previewLimit": 50,
+        "server": "localhost",
+        "driver": "PostgreSQL",
+        "name": "BearBasket-Dev",
+        "connectString": "postgres://postgres:postgres@db:5432/shopping_list"
+      }
+    ]
+  }
+}
