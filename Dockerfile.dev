@@ -1,0 +1,21 @@
+# Use an official Rust image with a stable base
+FROM rust:1.88 AS base
+
+# Install Node.js v22, pnpm, and other essential tools
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+    apt-get update && \
+    apt-get install -y nodejs git curl build-essential pkg-config libssl-dev && \
+    npm install -g pnpm && \
+    rustup component add clippy rustfmt
+
+# Create working directory
+WORKDIR /BearBasket
+
+# Set default shell
+SHELL ["/bin/bash", "-c"]
+
+# Copy source (can be mounted instead in docker-compose)
+COPY . /BearBasket
+
+# Default command
+CMD [ "bash" ]
