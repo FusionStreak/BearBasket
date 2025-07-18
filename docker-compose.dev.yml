@@ -1,23 +1,4 @@
 services:
-  dev:
-    container_name: bearbasket-dev
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    volumes:
-      - .:/app
-    ports:
-      - "3000:3000" # Web (Next.js)
-      - "8000:8000" # Backend API (Axum)
-    environment:
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/shopping_list
-      - REDIS_URL=redis://valkey:6379
-    depends_on:
-      - db
-      - valkey
-    stdin_open: true
-    tty: true
-
   db:
     container_name: bearbasket-dev-db
     image: postgres:17
