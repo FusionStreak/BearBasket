@@ -1,50 +1,37 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import { invoke } from "@tauri-apps/api/core";
-import "./App.css";
+// Main app layout - mobile-first, single-column with responsive sidebar
+import { useAppStore, useActiveList, useLists } from "./store";
+import { ListSelector } from "./components/ListSelector";
+import { GroceryList } from "./components/GroceryList";
+import { Header } from "./components/Header";
+import "./styles/layout.css";
 
 function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
-
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    setGreetMsg(await invoke("greet", { name }));
-  }
+  const activeListId = useAppStore((state) => state.activeListId);
+  const activeList = useActiveList();
+  const lists = useLists();
 
   return (
-    <main className="container">
-      <h1>Welcome to Tauri + React</h1>
+    <div className="app-container">
+      <Header />
 
-      <div className="row">
-        <a href="https://vite.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
+      <main className="app-main">
+        {/* Mobile: show list selector or active list */}
+        {/* Desktop: show both side-by-side */}
+        <aside className="sidebar" aria-label="Your lists">
+          <ListSelector lists={lists} activeListId={activeListId} />
+        </aside>
 
-      <form
-        className="row"
-        onSubmit={(e) => {
-          e.preventDefault();
-          greet();
-        }}
-      >
-        <input
-          id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-        />
-        <button type="submit">Greet</button>
-      </form>
-      <p>{greetMsg}</p>
-    </main>
+        <section className="content" aria-label="Grocery list">
+          {activeList ? (
+            <GroceryList list={activeList} />
+          ) : (
+            <div className="empty-state">
+              <p>Select a list or create a new one to get started.</p>
+            </div>
+          )}
+        </section>
+      </main>
+    </div>
   );
 }
 
