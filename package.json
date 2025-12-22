@@ -10,10 +10,15 @@
     "tauri": "tauri"
   },
   "dependencies": {
+    "@ark-ui/react": "^5.30.0",
+    "@hookform/resolvers": "^5.2.2",
     "@tauri-apps/api": "^2.9.1",
     "@tauri-apps/plugin-opener": "^2.5.2",
     "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "react-dom": "^19.2.3",
+    "react-hook-form": "^7.69.0",
+    "zod": "^4.2.1",
+    "zustand": "^5.0.9"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2.9.6",
