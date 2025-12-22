@@ -12,10 +12,17 @@ dist
 dist-ssr
 *.local
 target
+Cargo.lock
+.env
+.env.*.local
+.build/
+.cache/
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+.github/
+!.github/workflows/
 .idea
 .DS_Store
 *.suo
