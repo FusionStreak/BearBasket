@@ -1,3 +1,7 @@
-# BearBasket
+# Tauri + React + Typescript
 
-BearBasket is a full-stack web application designed to help users manage their shopping lists efficiently. It features a modern frontend built with React and TypeScript, and a robust backend powered by Rust and Axum. The application supports real-time updates using WebSockets, ensuring that users can collaborate on shopping lists seamlessly.
+This template should help get you started developing with Tauri, React and Typescript in Vite.
+
+## Recommended IDE Setup
+
+- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
