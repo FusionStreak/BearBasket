@@ -8,6 +8,7 @@
 //! - **Discovery**: Uses mDNS to advertise and discover other BearBasket instances
 //! - **Transport**: TCP-based message transport with length-prefixed framing
 //! - **Protocol**: JSON-based message protocol for CRDT synchronization
+//! - **Handlers**: Integration with bearbasket-core for database and CRDT operations
 //!
 //! # Usage
 //!
@@ -16,23 +17,28 @@
 //! - An inventory handler to list available grocery lists
 //! - An update handler to apply received CRDT updates
 //!
+//! Use the handler factory functions in the `handlers` module to create
+//! these callbacks connected to the database.
+//!
 //! See [`SyncService`] for more details.
 
 pub mod discovery;
 pub mod error;
+pub mod handlers;
 pub mod protocol;
 pub mod transport;
 
-pub use discovery::{Discovery, DiscoveryEvent, Peer, DEFAULT_PORT, SERVICE_TYPE};
+pub use discovery::{DEFAULT_PORT, Discovery, DiscoveryEvent, Peer, SERVICE_TYPE};
 pub use error::{Result, SyncError};
+pub use handlers::{create_inventory_handler, create_sync_handler, create_update_handler};
 pub use protocol::{
-    HelloMessage, ListMetadata, ListUpdateMessage, SyncMessage, SyncRequestMessage,
-    SyncResponseMessage, PROTOCOL_VERSION,
+    HelloMessage, ListMetadata, ListUpdateMessage, PROTOCOL_VERSION, SyncMessage,
+    SyncRequestMessage, SyncResponseMessage,
 };
 pub use transport::{Transport, TransportEvent};
 
 use std::sync::Arc;
-use tokio::sync::{mpsc, RwLock};
+use tokio::sync::{RwLock, mpsc};
 use tracing::info;
 
 /// Configuration for the sync service.
