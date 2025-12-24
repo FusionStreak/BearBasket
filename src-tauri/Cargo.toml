@@ -26,3 +26,4 @@ serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
 bearbasket-core = { path = "../crates/core" }
 bearbasket-sync = { path = "../crates/sync" }
+tokio = { version = "1.48", features = ["sync"] }
