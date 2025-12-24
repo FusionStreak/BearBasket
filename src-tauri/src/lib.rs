@@ -5,8 +5,11 @@ use bearbasket_core::error::CoreError;
 use bearbasket_core::model::{GroceryList, GroceryListWithItems, Item};
 use tauri::{Manager, State};
 
-/// Thread-safe database wrapper for Tauri state management.
-pub struct AppDatabase(pub Mutex<Database>);
+mod state;
+mod sync_commands;
+
+use state::{AppDatabase, AppSyncService};
+pub use sync_commands::{PeerInfo, SyncResult, SyncStatus};
 
 /// Returns the path to the database file in the app's data directory.
 fn get_db_path(app: &tauri::App) -> String {
@@ -169,6 +172,9 @@ pub fn run() {
             // Manage database state
             app.manage(AppDatabase(Mutex::new(db)));
 
+            // Initialize sync service state
+            app.manage(AppSyncService::new());
+
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -185,6 +191,11 @@ pub fn run() {
             toggle_item,
             update_item,
             get_items,
+            // Sync management
+            sync_commands::get_peers,
+            sync_commands::get_sync_status,
+            sync_commands::sync_with_peer,
+            sync_commands::toggle_sync,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
