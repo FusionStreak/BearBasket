@@ -13,15 +13,27 @@ uuid.workspace = true
 tracing.workspace = true
 
 # Async runtime
-tokio = { version = "1.48", features = ["rt-multi-thread", "net", "macros"] }
+tokio = { version = "1.48", features = [
+    "rt-multi-thread",
+    "net",
+    "sync",
+    "io-util",
+    "macros",
+    "time",
+] }
+tokio-util = { version = "0.7", features = ["codec"] }
 
 # LAN discovery (mDNS)
 mdns-sd = "0.17"
 
-# Networking
+# Networking  
 bytes = "1.5"
-quinn = "0.11"  # QUIC transport
-rustls = "0.23" # TLS for QUIC
+
+# System info
+hostname = "0.4"
+
+# Encoding
+base64 = "0.22"
 
 [features]
 default = []
