@@ -3,3 +3,4 @@ export { Header } from "./Header";
 export { ListSelector } from "./ListSelector";
 export { GroceryList } from "./GroceryList";
 export { ItemRow } from "./ItemRow";
+export { DevicesPanel, SyncStatusIndicator } from "./sync";

@@ -3,9 +3,12 @@ import { useState } from "react";
 import { Dialog } from "@ark-ui/react/dialog";
 import { Portal } from "@ark-ui/react/portal";
 import { Button } from "./ui";
+import { SyncStatusIndicator } from "./sync/SyncStatusIndicator";
+import { DevicesPanel } from "./sync/DevicesPanel";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [devicesPanelOpen, setDevicesPanelOpen] = useState(false);
 
   return (
     <header className="app-header">
@@ -14,6 +17,9 @@ export function Header() {
         <h1 className="app-title">
           <span aria-hidden="true">🐻</span> BearBasket
         </h1>
+
+        {/* Sync status indicator */}
+        <SyncStatusIndicator onClick={() => setDevicesPanelOpen(true)} />
 
         {/* Mobile menu toggle */}
         <button
@@ -30,8 +36,12 @@ export function Header() {
 
         {/* Desktop nav */}
         <nav className="header-nav desktop-only" aria-label="Main navigation">
-          <Button variant="ghost" size="sm">
-            Sync
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setDevicesPanelOpen(true)}
+          >
+            Devices
           </Button>
           <Button variant="ghost" size="sm">
             Settings
@@ -50,7 +60,15 @@ export function Header() {
                 App navigation menu
               </Dialog.Description>
               <nav className="mobile-nav" aria-label="Mobile navigation">
-                <Button variant="ghost" size="lg" className="mobile-nav-item">
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  className="mobile-nav-item"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setDevicesPanelOpen(true);
+                  }}
+                >
                   Sync Devices
                 </Button>
                 <Button variant="ghost" size="lg" className="mobile-nav-item">
@@ -73,6 +91,12 @@ export function Header() {
           </Dialog.Positioner>
         </Portal>
       </Dialog.Root>
+
+      {/* Devices panel */}
+      <DevicesPanel
+        open={devicesPanelOpen}
+        onClose={() => setDevicesPanelOpen(false)}
+      />
     </header>
   );
 }
